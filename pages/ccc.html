@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Personal Website</title>
+  <style>
+    /* ---------- RESET & BASE ---------- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f5f6fa;
+      color: #2f3640;
+      line-height: 1.6;
+    }
+
+    header {
+      background: #2f3640;
+      color: #fff;
+      text-align: center;
+      padding: 1.5rem 1rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      background: #353b48;
+      padding: 0.8rem 0;
+    }
+
+    nav a {
+      color: #f5f6fa;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00a8ff;
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #273c75;
+      position: relative;
+    }
+
+    h2::after {
+      content: "";
+      width: 60px;
+      height: 3px;
+      background: #00a8ff;
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+      margin-bottom: 2rem;
+    }
+
+    /* ---------- ABOUT SECTION ---------- */
+    .about-content {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .about-content img {
+      width: 180px;
+      border-radius: 50%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 250px;
+      text-indent: 30px;
+    }
+
+    /* ---------- PROFILE SECTION ---------- */
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .profile-grid img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 12px;
+      justify-self: center;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+
+    .profile-grid ul {
+      list-style: none;
+      line-height: 2;
+    }
+
+    .profile-grid li strong {
+      color: #273c75;
+    }
+
+    /* ---------- SKILL SECTION ---------- */
+    .skill-item {
+      margin-bottom: 1.5rem;
+    }
+
+    .skill-item p {
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: #273c75;
+    }
+
+    .bar {
+      width: 100%;
+      height: 12px;
+      background: #dcdde1;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .fill {
+      height: 100%;
+      background: #00a8ff;
+      border-radius: 10px;
+      width: 0;
+      animation: fillAnim 1.5s forwards;
+    }
+
+    @keyframes fillAnim {
+      from { width: 0; }
+      to { width: var(--width, 100%); }
+    }
+
+    /* ---------- OTHER SECTION ---------- */
+    .other-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .other-card {
+      background: #f0f4ff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .other-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    footer {
+      text-align: center;
+      background: #2f3640;
+      color: #fff;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 768px) {
+      .profile-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .about-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      .about-text {
+        text-indent: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>My Personal Website</h1>
+  </header>
+
+  <nav>
+    <a href="#about">About</a>
+    <a href="#profile">Profile</a>
+    <a href="#skill">Skill</a>
+    <a href="#other">Other</a>
+  </nav>
+
+  <!-- ABOUT -->
+  <section id="about" class="card about">
+    <h2>About Me</h2>
+    <div class="about-content">
+      <img src="https://via.placeholder.com/180" alt="Profile Photo">
+      <div class="about-text">
+        <p>Hello! I'm a web developer passionate about creating modern, responsive, and interactive websites. 
+        I enjoy learning new technologies and improving my craft every day.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFILE -->
+  <section id="profile" class="card profile">
+    <h2>Profile</h2>
+    <div class="profile-grid">
+      <ul>
+        <li><strong>Name:</strong> John Doe</li>
+        <li><strong>Age:</strong> 24</li>
+        <li><strong>Email:</strong> johndoe@example.com</li>
+        <li><strong>Location:</strong> Ho Chi Minh City, Vietnam</li>
+      </ul>
+      <img src="https://via.placeholder.com/300x300" alt="John Doe">
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skill" class="card skill">
+    <h2>Skills</h2>
+
+    <div class="skill-item">
+      <p>HTML</p>
+      <div class="bar"><div class="fill" style="--width: 90%;"></div></div>
+    </div>
+
+    <div class="skill-item">
+      <p>CSS</p>
+      <div class="bar"><div class="fill" style="--width: 85%;"></div></div>
+    </div>
+
+    <div class="skill-item">
+      <p>JavaScript</p>
+      <div class="bar"><div class="fill" style="--width: 70%;"></div></div>
+    </div>
+
+    <div class="skill-item">
+      <p>Python</p>
+      <div class="bar"><div class="fill" style="--width: 75%;"></div></div>
+    </div>
+
+    <div class="skill-item">
+      <p>Git</p>
+      <div class="bar"><div class="fill" style="--width: 65%;"></div></div>
+    </div>
+  </section>
+
+  <!-- OTHER -->
+  <section id="other" class="card other">
+    <h2>Other Information</h2>
+    <div class="other-grid">
+      <div class="other-card">
+        <h3>🎵 Music</h3>
+        <p>I love listening to Lo-fi and Jazz while coding — it helps me stay focused.</p>
+      </div>
+      <div class="other-card">
+        <h3>📸 Photography</h3>
+        <p>Capturing street life and landscapes is one of my favorite hobbies.</p>
+      </div>
+      <div class="other-card">
+        <h3>🌍 Travel</h3>
+        <p>Exploring new places, meeting new people, and learning cultures inspire my creativity.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 John Doe. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>

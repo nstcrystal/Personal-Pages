@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Vo Van Duy</title>
+<style>
+  :root{
+    --bg:#071024;
+    --card:#0f1724;
+    --accent:#ffbf00;
+    --muted:#9aa7bf;
+    --glass: rgba(255,255,255,0.03);
+  }
+  html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+  body{
+    background: radial-gradient(ellipse at 20% 10%, rgba(255,191,0,0.06), transparent 10%),
+                linear-gradient(180deg,#03102c 0%, #071024 100%);
+    color:#e6eef8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:24px;
+  }
+  .container{
+    width:960px;
+    max-width:95%;
+    background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(2,6,23,0.6);
+    padding:22px;
+    display:grid;
+    grid-template-columns: 1fr 320px;
+    gap:18px;
+  }
+
+  /* Left: Game area */
+  .game{
+    background:var(--card);
+    border-radius:12px;
+    padding:18px;
+    box-shadow: inset 0 -8px 24px rgba(0,0,0,0.5);
+  }
+  .title{display:flex;align-items:center;gap:12px;}
+  .logo{
+    width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#ff7a00);
+    display:flex;align-items:center;justify-content:center;font-weight:700;color:#111;
+    font-size:20px;box-shadow:0 6px 18px rgba(255,191,0,0.08);
+  }
+  h1{margin:0;font-size:20px;}
+  p.lead{margin:6px 0 12px;color:var(--muted);font-size:13px;}
+
+  /* reels */
+  .reels{
+    display:flex;gap:12px;justify-content:center;margin:18px 0;
+  }
+  .reel{
+    width:110px;height:110px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:44px;
+    box-shadow:0 6px 16px rgba(1,6,20,0.6);
+    user-select:none;
+  }
+  .controls{
+    display:flex;align-items:center;gap:12px;margin-top:10px;flex-wrap:wrap;
+  }
+  .btn{
+    background:linear-gradient(180deg,var(--accent),#ff8c00);
+    color:#111;padding:10px 16px;border-radius:10px;border:0;font-weight:700;cursor:pointer;
+    box-shadow:0 6px 14px rgba(255,139,0,0.12);
+  }
+  .btn.secondary{
+    background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04);
+    box-shadow:none;font-weight:600;padding:8px 12px;
+  }
+  .sidebar{
+    background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+    border-radius:12px;padding:14px;
+  }
+  .stat{display:flex;justify-content:space-between;margin:10px 0;color:var(--muted);font-size:14px;}
+  label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px;}
+  input[type="number"]{width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:var(--glass);color:inherit;}
+
+  .notice{font-size:12px;color:#ffd6a8;background:rgba(255,191,0,0.06);padding:10px;border-radius:8px;margin-top:12px;color:#fff;}
+  .footer{font-size:12px;color:var(--muted);margin-top:14px;}
+
+  /* simple keyframe for small win flash */
+  .flash{
+    animation: flash 700ms ease-in-out;
+  }
+  @keyframes flash{
+    0%{box-shadow:0 0 0px rgba(255,191,0,0);}
+    50%{box-shadow:0 0 18px rgba(255,191,0,0.6);}
+    100%{box-shadow:0 0 0 rgba(255,191,0,0);}
+  }
+
+  /* Age modal */
+  .modal{
+    position:fixed;inset:0;background:rgba(2,6,23,0.6);display:flex;align-items:center;justify-content:center;
+  }
+  .modal-card{
+    width:420px;background:linear-gradient(180deg,#071026,#05203a);padding:22px;border-radius:12px;border:1px solid rgba(255,255,255,0.03);
+    text-align:center;color:#eaf3ff;
+  }
+  .modal-card p{color:var(--muted);}
+  .muted-small{color:var(--muted);font-size:13px;margin-top:8px;}
+</style>
+</head>
+<body>
+<div class="container" role="application" aria-label="Demo máy xèng">
+  <div class="game" id="gameArea">
+    <div class="title">
+      <div class="logo">SX</div>
+      <div>
+        <h1>SlotX — Demo Máy Xèng</h1>
+        <p class="lead">Chỉ là bản demo dùng tiền ảo. Không có giao dịch thật.</p>
+      </div>
+    </div>
+
+    <div class="reels" aria-live="polite" aria-atomic="true">
+      <div class="reel" id="reel0">🍒</div>
+      <div class="reel" id="reel1">🍋</div>
+      <div class="reel" id="reel2">🔔</div>
+    </div>
+
+    <div class="controls">
+      <button class="btn" id="spinBtn">Quay</button>
+      <button class="btn secondary" id="autoBtn">Auto 10 lần</button>
+      <div style="min-width:120px;">
+        <label for="bet">Cược (credit)</label>
+        <input id="bet" type="number" min="1" step="1" value="5" />
+      </div>
+
+      <div style="margin-left:auto; text-align:right;">
+        <div style="font-size:12px;color:var(--muted)">Credit</div>
+        <div id="credits" style="font-weight:800;font-size:20px">100</div>
+      </div>
+    </div>
+
+    <div id="message" class="notice" style="display:none;">Bạn thắng!</div>
+
+    <div class="footer">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <div style="color:var(--muted);font-size:13px;">Luật chơi: 3 biểu tượng giống nhau = thắng lớn; 2 giống = thắng nhỏ.</div>
+      </div>
+    </div>
+  </div>
+
+  <aside class="sidebar" aria-label="Thông tin">
+    <div style="font-weight:700;font-size:15px">Tài khoản</div>
+    <div class="stat"><span>Credit:</span><span id="sideCredits">100</span></div>
+    <div class="stat"><span>Lần chơi:</span><span id="plays">0</span></div>
+    <div class="stat"><span>Thắng:</span><span id="wins">0</span></div>
+
+    <div style="margin-top:12px;">
+      <label>Thống kê trả thưởng (ví dụ)</label>
+      <div style="font-size:13px;color:var(--muted)">
+        <div>3× biểu tượng giống → nhân cược ×10</div>
+        <div>2× biểu tượng giống → nhân cược ×2</div>
+      </div>
+    </div>
+
+    <div class="notice" style="margin-top:14px;">
+      Lưu ý: Đây là demo. Không dùng cho cá cược tiền thật.
+    </div>
+
+    <div style="margin-top:12px;">
+      <button class="btn secondary" id="resetBtn">Reset demo</button>
+    </div>
+  </aside>
+</div>
+
+<!-- Age modal -->
+<div class="modal" id="ageModal" role="dialog" aria-modal="true" aria-label="Xác nhận tuổi">
+  <div class="modal-card">
+    <h2>Xác nhận tuổi</h2>
+    <p class="muted-small">Bạn phải từ 18 tuổi trở lên để sử dụng bản demo này. Vui lòng xác nhận.</p>
+    <div style="margin-top:14px;display:flex;gap:10px;justify-content:center;">
+      <button class="btn" id="confirmAge">Tôi trên 18</button>
+      <button class="btn secondary" id="declineAge">Tôi dưới 18</button>
+    </div>
+    <p class="muted-small">Demo chỉ dùng tiền ảo và nhằm mục đích học tập / thiết kế.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  // Symbols and basic payout rules
+  const symbols = ['🍒','🍋','🔔','⭐','💎','7️⃣'];
+  const payouts = { // multiplier for 3-of-kind and 2-of-kind
+    three: { '7️⃣': 50, '💎': 20, '⭐': 15, '🔔': 10, '🍋': 8, '🍒': 6 },
+    two: 2
+  };
+
+  // state
+  let credits = 100;
+  let plays = 0, wins = 0;
+  let spinning = false;
+  const reelEls = [document.getElementById('reel0'), document.getElementById('reel1'), document.getElementById('reel2')];
+  const spinBtn = document.getElementById('spinBtn');
+  const autoBtn = document.getElementById('autoBtn');
+  const betInput = document.getElementById('bet');
+  const creditsEl = document.getElementById('credits');
+  const sideCredits = document.getElementById('sideCredits');
+  const playsEl = document.getElementById('plays');
+  const winsEl = document.getElementById('wins');
+  const messageEl = document.getElementById('message');
+  const resetBtn = document.getElementById('resetBtn');
+
+  function updateUI(){
+    creditsEl.textContent = credits;
+    sideCredits.textContent = credits;
+    playsEl.textContent = plays;
+    winsEl.textContent = wins;
+  }
+  updateUI();
+
+  function randomSymbol(){ return symbols[Math.floor(Math.random()*symbols.length)]; }
+
+  // Spin animation helper
+  function spinOnce(bet){
+    if (spinning) return;
+    bet = Math.max(1, Math.floor(bet));
+    if (bet > credits){
+      showMessage('Không đủ credit để cược.', true);
+      return;
+    }
+    spinning = true;
+    spins = [null,null,null];
+    credits -= bet;
+    plays++;
+    updateUI();
+    // animate each reel by cycling symbols for a short time, then stop
+    const durations = [900, 1300, 1700]; // ms
+    const intervals = [];
+    const results = [];
+    reelEls.forEach((el, idx) => {
+      let elapsed = 0;
+      const freq = 80 + idx*20;
+      intervals[idx] = setInterval(()=> {
+        el.textContent = randomSymbol();
+      }, freq);
+      setTimeout(()=> {
+        clearInterval(intervals[idx]);
+        const final = randomSymbol();
+        el.textContent = final;
+        results[idx] = final;
+        // when all results ready, evaluate
+        if (results.filter(Boolean).length === reelEls.length){
+          evaluateResult(results, bet);
+          spinning = false;
+        }
+      }, durations[idx]);
+    });
+  }
+
+  function evaluateResult(results, bet){
+    // count occurrences
+    const counts = {};
+    results.forEach(s => counts[s] = (counts[s]||0) + 1);
+    // check 3-of-kind
+    let won = 0;
+    let message = 'Không trúng. Thử lại!';
+    for (const sym in counts){
+      if (counts[sym] === 3){
+        // payout by symbol if defined else 10x
+        const mul = payouts.three[sym] || 10;
+        won = bet * mul;
+        message = `Jackpot! 3 ${sym} — Thắng ${won} credit`;
+        break;
+      } else if (counts[sym] === 2){
+        const mul = payouts.two;
+        won = bet * mul;
+        message = `Trúng nhỏ: 2 ${sym} — Thắng ${won} credit`;
+        // continue checking if there is a 3-of-kind elsewhere (won't happen)
+      }
+    }
+    if (won > 0){
+      credits += won;
+      wins++;
+      showMessage(message, false, true);
+      // add visual flash on reels
+      reelEls.forEach(el => { el.classList.add('flash'); setTimeout(()=> el.classList.remove('flash'),700); });
+    } else {
+      showMessage(message, true, false);
+    }
+    updateUI();
+  }
+
+  function showMessage(text, isError=false, isWin=false){
+    messageEl.style.display = 'block';
+    messageEl.style.background = isWin ? 'linear-gradient(90deg, rgba(0,140,255,0.08), rgba(255,191,0,0.06))' : (isError ? 'rgba(255,100,100,0.08)' : 'rgba(255,191,0,0.06)');
+    messageEl.textContent = text;
+    setTimeout(()=> { messageEl.style.display = 'none'; }, 2500);
+  }
+
+  spinBtn.addEventListener('click', ()=> { spinOnce(Number(betInput.value)); });
+
+  autoBtn.addEventListener('click', ()=>{
+    const times = 10;
+    let i = 0;
+    const run = () => {
+      if (i >= times) return;
+      if (credits <= 0) { showMessage('Hết credit!'); return; }
+      spinOnce(Number(betInput.value));
+      i++;
+      // wait until not spinning before next
+      const wait = setInterval(()=> {
+        if (!spinning){
+          clearInterval(wait);
+          run();
+        }
+      }, 150);
+    };
+    run();
+  });
+
+  resetBtn.addEventListener('click', ()=> {
+    credits = 100; plays = 0; wins = 0;
+    updateUI();
+    showMessage('Đã reset demo.', false);
+  });
+
+  // Age modal
+  const ageModal = document.getElementById('ageModal');
+  document.getElementById('confirmAge').addEventListener('click', ()=> {
+    ageModal.style.display = 'none';
+  });
+  document.getElementById('declineAge').addEventListener('click', ()=> {
+    // if under 18, lock the page (simple behavior)
+    alert('Bạn phải từ 18 tuổi trở lên để xem nội dung này. Trang sẽ đóng.');
+    window.close(); // may fail in some browsers; it's a polite attempt
+    ageModal.querySelector('.modal-card').innerHTML = '<h3>Không đủ tuổi</h3><p class="muted-small">Bạn không được phép sử dụng bản demo này.</p>';
+  });
+
+  // Accessibility: keyboard spin with Space when focus on spin button
+  spinBtn.addEventListener('keydown', (e)=> {
+    if (e.code === 'Space') { e.preventDefault(); spinOnce(Number(betInput.value)); }
+  });
+
+  // small safety: prevent entering extremely large bets
+  betInput.addEventListener('input', ()=> {
+    if (Number(betInput.value) > 9999) betInput.value = 9999;
+  });
+})();
+</script>
+</body>
+</html>

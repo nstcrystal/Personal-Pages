@@ -1,0 +1,172 @@
+<!--
+This single file contains two files for convenience:
+1) index.html (below)
+2) styles.css (after the HTML)
+
+Save the first part as `index.html` and the second part as `styles.css` (same folder).
+Based on: https://github.com/2giosangmitom/blog — a minimalist Nuxt blog. This is a static HTML/CSS approximation.
+-->
+
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Minimalist Blog — Static Demo</title>
+  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="A minimalist blog layout inspired by 2giosangmitom/blog (Nuxt)">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">My Minimal Blog</a>
+      <nav class="main-nav">
+        <a href="#">Home</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="grid">
+      <section class="posts">
+        <article class="post">
+          <h2 class="post-title"><a href="#">Understanding Small Things</a></h2>
+          <div class="meta">Oct 15, 2025 • 5 min read</div>
+          <p class="excerpt">A short excerpt describing the article. This static demo mirrors the minimalist styling from the original Nuxt project.</p>
+          <a class="read-more" href="#">Read more →</a>
+        </article>
+
+        <article class="post">
+          <h2 class="post-title"><a href="#">How I Organize Notes</a></h2>
+          <div class="meta">Sep 27, 2025 • 3 min read</div>
+          <p class="excerpt">Notes on keeping things simple and effective. The layout focuses on readability and pleasant spacing.</p>
+          <a class="read-more" href="#">Read more →</a>
+        </article>
+
+        <article class="post small">
+          <h3 class="post-title"><a href="#">Snippets & Tips</a></h3>
+          <div class="meta">Aug 12, 2025</div>
+        </article>
+
+      </section>
+
+      <aside class="sidebar">
+        <div class="card">
+          <h4>About</h4>
+          <p>Minimalist blog demo inspired by <em>2giosangmitom/blog</em>. Built as static HTML/CSS for quick prototyping.</p>
+        </div>
+
+        <div class="card">
+          <h4>Recent</h4>
+          <ul class="recent-list">
+            <li><a href="#">Understanding Small Things</a></li>
+            <li><a href="#">How I Organize Notes</a></li>
+            <li><a href="#">Snippets & Tips</a></li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4>Subscribe</h4>
+          <form class="subscribe-form">
+            <input type="email" placeholder="you@example.com" aria-label="email">
+            <button type="submit">Subscribe</button>
+          </form>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© 2025 Minimal Blog — Built from a Nuxt example</small>
+    </div>
+  </footer>
+
+
+<!-- styles.css (save as a separate file named styles.css) -->
+<style>
+/* --------------------------
+   styles.css — minimalist blog
+   -------------------------- */
+:root{
+  --bg: #0f1724; /* dark background */
+  --card: #0b1220;
+  --muted: #9aa6bf;
+  --accent: #6ee7b7; /* green-ish */
+  --text: #e6eef8;
+  --max-width: 1100px;
+  --radius: 12px;
+  --gap: 28px;
+  --container-pad: 20px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg,var(--bg), #071023);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+}
+.container{
+  max-width:var(--max-width);
+  margin:0 auto;
+  padding:var(--container-pad);
+}
+
+.site-header{
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+  backdrop-filter: blur(6px);
+}
+.header-inner{
+  display:flex;align-items:center;justify-content:space-between;padding:18px 0;
+}
+.brand{font-weight:700;text-decoration:none;color:var(--text);font-size:1.125rem}
+.main-nav a{margin-left:18px;text-decoration:none;color:var(--muted);font-size:0.95rem}
+.main-nav a:hover{color:var(--text)}
+
+.grid{
+  display:grid;
+  grid-template-columns: 1fr 320px;
+  gap:var(--gap);
+  align-items:start;
+  margin-top:28px;
+}
+
+.posts{min-width:0}
+.post{background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);padding:22px;border-radius:14px;margin-bottom:18px}
+.post-title{margin:0 0 8px 0;font-size:1.25rem}
+.post-title a{color:var(--text);text-decoration:none}
+.meta{color:var(--muted);font-size:0.9rem;margin-bottom:10px}
+.excerpt{margin:0 0 12px 0;color: #cfd9ea}
+.read-more{font-weight:600;text-decoration:none;color:var(--accent)}
+.post.small{padding:12px}
+
+.sidebar .card{background:var(--card);padding:16px;border-radius:12px;margin-bottom:18px;color:var(--muted)}
+.sidebar h4{color:var(--text);margin:0 0 8px 0}
+.recent-list{list-style:none;padding:0;margin:0}
+.recent-list li{margin-bottom:8px}
+.recent-list a{text-decoration:none;color:var(--muted);font-size:0.95rem}
+.recent-list a:hover{color:var(--text)}
+
+.subscribe-form{display:flex;gap:8px}
+.subscribe-form input{flex:1;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
+.subscribe-form button{padding:10px 14px;border-radius:8px;border:0;background:var(--accent);color:#032016;font-weight:700}
+
+.site-footer{margin-top:36px;padding:18px 0;border-top:1px solid rgba(255,255,255,0.03);color:var(--muted)}
+
+/* Responsive */
+@media (max-width: 900px){
+  .grid{grid-template-columns:1fr;}
+  .main-nav{display:none}
+}
+
+/* Small utilities */
+a{transition:all .15s ease}
+</style>
+
+</body>
+</html>
