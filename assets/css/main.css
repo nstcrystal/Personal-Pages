@@ -235,6 +235,22 @@ i {
 
 
 
+
+.next-page {
+    display: flex;
+    padding: 0 2rem 2rem 2rem;
+    justify-content: flex-end;
+}
+.next-page a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+
+
+
+
 @media (max-width: 768px) {
     .about-content {
         flex-direction: column;
