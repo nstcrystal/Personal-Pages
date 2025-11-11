@@ -9,7 +9,6 @@
     margin: 0;
     box-sizing:  border-box;
     /* overflow-x: hidden; */
-    color: #efefef #eeeeee #ffffff #f9f4ed #f0f4ff #cc6666 #444444 #00a8ff #273c75;
     user-select: none;
     -webkit-tap-highlight-color: transparent;
     touch-action: manipulation;
@@ -82,11 +81,11 @@ nav {
 
 
 
-.introduction_section, .about_section, .skill_section, .other {
+.introduction_section, .about_section, .skills_section, .other {
     background: #fff;
     border-radius: 10px;
-    padding: 2rem;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 2rem;
     margin: 2rem;
 }
 h2 {
@@ -190,6 +189,35 @@ h2 {
 }
 
 
+/* Projects */
+.projecs_section {
+    background: linear-gradient(45deg, #00aaff43, #33a0ffa6, #3374ad79);
+    padding: 3rem 2rem;
+}
+.projects-grid {
+    display: grid;
+    margin-top: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+
+}
+.project-card {
+    background: #d6f1ffd6;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+.projecs_section h2 {
+    padding-left: 2rem;
+    color: #0a1c4f;
+}
+.project-card p {
+    margin-top: 0.3rem;
+}
+
+
 /* Other */
 .other-grid {
     display: grid;
@@ -259,6 +287,16 @@ i {
         padding: 0;
     }
 
+    .projects-grid {
+        display: grid;
+        grid-template-columns: none;
+    }
+    
+    .other-grid {
+        display: grid;
+        grid-template-columns: none;
+    }
+
     .menu_bar {
         display: none;
     }
@@ -286,8 +324,8 @@ i {
         box-shadow: 0 4px 8px rgba(0,0,0,0.3);
         border-radius: 10px;
         z-index: 1;
-        right: 0;
-        top: 48px;
+        top: 3.2rem;
+        right: -1.5rem;
     }
     .dropdown-content div {
         padding: 1.5rem;
@@ -316,7 +354,11 @@ i {
     .about-grid i:hover {
         color: #00a8ff;
     }
-
+    
+    .project-card:hover {
+        transform: translateY(-5px);
+    }
+    
     .skill-item p:hover {
         transform: translateY(-5px);
         box-shadow: 0 3px 10px rgba(0,0,0,0.3);
@@ -336,6 +378,10 @@ i {
         color: #00a8ff;
     }
 
+    .project-card:active {
+        transform: translateY(-5px);
+    }
+    
     .skill-item p:active {
         transform: translateY(-5px);
         box-shadow: 0 3px 10px rgba(0,0,0,0.3);
@@ -346,10 +392,6 @@ i {
     }
     .troll:active {
         color: black;
-    }
- 
-    .about-grid i:active {
-        color: #00a8ff;
     }
 
 }
