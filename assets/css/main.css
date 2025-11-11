@@ -336,15 +336,15 @@ i {
         color: #00a8ff;
     }
 
-    .skill-item p:hover {
+    .skill-item p:active {
         transform: translateY(-5px);
         box-shadow: 0 3px 10px rgba(0,0,0,0.3);
     }
     
-    .other-card:hover {
+    .other-card:active {
         transform: translateY(-5px);
     }
-    .troll:hover {
+    .troll:active {
         color: black;
     }
  
