@@ -76,10 +76,13 @@ nav {
 .menu_bar a:hover {
     color: #00a8ff;
 }
+.dropdown {
+    display: none;
+}
 
 
 
-.about_section, .profile_section, .skill_section, .other {
+.introduction_section, .about_section, .skill_section, .other {
     background: #fff;
     border-radius: 10px;
     padding: 2rem;
@@ -95,20 +98,20 @@ h2 {
 }
 
 
-/* About */
-.about-content {
+/* Introduction */
+.introduction-content {
     display: flex;
     margin-top: 1rem;
     align-items: center;
     flex-wrap: wrap;
     gap: 3rem;
 }
-.about-content img {
+.introduction-content img {
     width: 180px;
     border-radius: 50%;
     box-shadow: 0 2px 10px rgba(0,0,0,0.5);
 }
-.about-text {
+.introduction-text {
     flex: 1;
     /* padding-right: 1rem; */
     min-width: 250px;
@@ -116,39 +119,37 @@ h2 {
 }
 
 
-/* Profile */
-.profile-grid {
+/* About */
+.about-grid {
     display: grid;
     margin-top: 1rem;
     grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 3rem;
 }
-.profile-grid img {
+.about-grid img {
     width: 100%;
     max-width: 500px;
     border-radius: 12px;
     justify-self: center;
     box-shadow: 0 3px 10px rgba(0,0,0,0.5);
 }
-.profile-grid ul {
+.about-grid ul {
     list-style: none;
     padding-left: 3rem;
     line-height: 2;
 }
-.profile-grid li strong {
+.about-grid li strong {
     color: #273c75;
 }
-.profile-grid i {
+.about-grid i {
     margin-top: 1rem;
     margin-right: 1rem;
     color: #273c75;
     font-size: 25px;
     transition: color 0.3s ease;
 }
-.profile-grid i:hover {
-    color: #00a8ff;
-}
+
 
 
 /* Skills */
@@ -171,10 +172,6 @@ h2 {
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     font-weight: bold;
     transition: all 0.2s ease;
-}
-.skill-item p:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
 }
 .bar {
   width: 70%;
@@ -212,15 +209,10 @@ h2 {
 .other-card p {
     margin-top: 0.3rem;
 }
-.other-card:hover {
-    transform: translateY(-5px);
-}
 .troll {
     color: #f0f4ff;
 }
-.troll:hover {
-    color: black;
-}
+
 
 
 
@@ -254,27 +246,110 @@ i {
 
 
 @media (max-width: 768px) {
-    .about-content {
+    .introduction-content {
         flex-direction: column;
     }
 
-    .profile-grid {
+    .about-grid {
         grid-template-columns: 1fr;
         text-align: center;
     }
 
-    .profile-grid ul {
+    .about-grid ul {
         padding: 0;
     }
 
     .menu_bar {
         display: none;
     }
+    .dropdown {
+        display: block;
+        position: relative;
+        display: inline-block;
+    }
+    .dropdown p {
+        background-color: #3498db;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 6px;
+    }
+    .dropdown p i {
+        margin: 0;
+    }
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #efefef;
+        min-width: 300px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        border-radius: 10px;
+        z-index: 1;
+        right: 0;
+        top: 48px;
+    }
+    .dropdown-content div {
+        padding: 1.5rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 1rem;
+    }
+    .dropdown-content a {
+        padding: 0.5rem;
+        color: black;
+        border-radius: 10px;
+        background-color: #fff;
+        text-decoration: none;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+    .dropdown-content a:active {
+        color: #00a8ff;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .about-grid i:hover {
+        color: #00a8ff;
+    }
+
+    .skill-item p:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    }
+
+    .other-card:hover {
+        transform: translateY(-5px);
+    }
+    .troll:hover {
+        color: black;
+    }
 }
 
 
-/* @media (hover: none) {
-    *:hover {
-        filter: none;
+@media (hover: none) and (pointer: coarse) {
+    .about-grid i:active {
+        color: #00a8ff;
     }
-} */
+
+    .skill-item p:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    }
+    
+    .other-card:hover {
+        transform: translateY(-5px);
+    }
+    .troll:hover {
+        color: black;
+    }
+ 
+    .about-grid i:active {
+        color: #00a8ff;
+    }
+
+}
