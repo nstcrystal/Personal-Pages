@@ -215,6 +215,47 @@
         <p><a href="./test.html">Next page >></a></p>
     </div>
 
+    <div class="question">
+        <h2>Question</h2>
+        <div class="question-form">
+            <div class="text-form-top">
+                <p>
+                    <i class="fa-solid fa-circle"></i>
+                    Nếu các bạn có điều gì muốn <strong>hỏi, nhắn gửi</strong> cho tôi
+                </p>
+                <p>
+                    <i class="fa-solid fa-circle"></i>
+                    hoặc đơn giản là kiểm tra xem cái này có hoạt động không
+                </p>
+                <p>Các bạn có thể điền vào cái Form này và gửi cho tôi.</p>
+                <p>Tôi sẽ xớm liên hệ lại</p>
+                <p><i class="fa-solid fa-angles-down"></i></p>
+            </div>
+            <form id="questionForm">
+                <h3>Gửi câu hỏi, điều muốn nói cho tôi</h3>
+                <input type="text" id="name" placeholder="Tên của bạn" required>
+                <textarea id="question" placeholder="Nhập câu hỏi..." rows="5" required></textarea>
+                <button type="submit">Gửi</button>
+            </form>
+            <div class="text-form-right">
+                <p>
+                    <i class="fa-solid fa-circle"></i>
+                    Nếu các bạn có điều gì muốn <strong>hỏi, nhắn gửi</strong> cho tôi
+                </p>
+                <p>
+                    <i class="fa-solid fa-circle"></i>
+                    hoặc đơn giản là kiểm tra xem cái này có hoạt động không
+                </p>
+                <p>
+                    <i class="fa-solid fa-circle"></i>
+                    Các bạn có thể điền vào cái Form này và gửi cho tôi
+                </p>
+                <p class="thanks">Tôi sẽ xớm liên hệ lại !!</p>
+            </div>
+        </div>
+    </div>
+
+
     <footer>
         <h3>Vo Van Duy</h3>
         <p>
@@ -222,6 +263,40 @@
             2025 NSTCrystal. All rights reserved.
         </p>
     </footer>
+
+
+
+<script>
+  const webhookURL = "https://discord.com/api/webhooks/1438047383698280469/U8RB-3e9O9EaURfiQwkeiL_-IKR9Q2ggUweIl2NrSslQ0bLQxGL9GnIqDaP2QfOpDNRf";
+
+  document.getElementById("questionForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const question = document.getElementById("question").value;
+    const time = new Date().toLocaleString("vi-VN");
+
+    const payload = {
+        content: 
+            "```ini\n[Câu hỏi mới từ website]```" +
+            // `**Câu hỏi mới từ website:**\n` +
+            `Thời gian:  *${time}*\n` +
+            `Tên:  ***${name}***\n` +
+            `Nội dung:\n` +
+            `  ${question}\n`
+    };
+
+    await fetch(webhookURL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    alert("Đã gửi câu hỏi thành công! Cảm ơn bạn rất nhiều");
+    e.target.reset();
+  });
+</script>
+
 </body>
 <script src="https://kit.fontawesome.com/fb1d4fa484.js" crossorigin="anonymous"></script>
 </html>

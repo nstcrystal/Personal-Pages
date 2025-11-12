@@ -81,7 +81,7 @@ nav {
 
 
 
-.introduction_section, .about_section, .skills_section, .other {
+.introduction_section, .about_section, .skills_section, .other, .question {
     background: #fff;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -150,6 +150,34 @@ h2 {
 }
 
 
+/* Projects */
+.projecs_section h2 {
+    padding-left: 2rem;
+    color: #0a1c4f;
+}
+.projecs_section {
+    background: linear-gradient(45deg, #00aaff43, #33a0ffa6, #3374ad79);
+    padding: 3rem 2rem;
+}
+.projects-grid {
+    display: grid;
+    margin-top: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+
+}
+.project-card {
+    background: #d6f1ffd6;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+.project-card p {
+    margin-top: 0.3rem;
+}
+
 
 /* Skills */
 .skills-list {
@@ -170,7 +198,7 @@ h2 {
     border-radius: 25px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.2);
     font-weight: bold;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
 }
 .bar {
   width: 70%;
@@ -189,35 +217,6 @@ h2 {
 }
 
 
-/* Projects */
-.projecs_section {
-    background: linear-gradient(45deg, #00aaff43, #33a0ffa6, #3374ad79);
-    padding: 3rem 2rem;
-}
-.projects-grid {
-    display: grid;
-    margin-top: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 2rem;
-
-}
-.project-card {
-    background: #d6f1ffd6;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    transition: all 0.2s ease;
-    cursor: pointer;
-}
-.projecs_section h2 {
-    padding-left: 2rem;
-    color: #0a1c4f;
-}
-.project-card p {
-    margin-top: 0.3rem;
-}
-
-
 /* Other */
 .other-grid {
     display: grid;
@@ -231,7 +230,7 @@ h2 {
     border-radius: 12px;
     box-shadow: 0 3px 10px rgba(0,0,0,0.3);
     /* transition: transform 0.3s; */
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     cursor: pointer;
 }
 .other-card p {
@@ -241,6 +240,66 @@ h2 {
     color: #f0f4ff;
 }
 
+
+
+.question h3 {
+    text-align: center;
+    color: #3498db;
+    font-weight: bold;
+}
+.question-form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.question-form form {
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 300px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+}
+.question-form .text-form-top {
+    display: none;
+}
+.question-form .text-form-right {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+input, textarea, button {
+    width: 100%;
+    margin-top: 1rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+button {
+    background: #00aaff;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.question-form > div {
+    font-size: 18px;
+    line-height: 2;
+}
+.question-form strong {
+    font-style: italic;
+    color: #273c75;
+}
+.question-form i {
+    font-size: 10px;
+}
+.thanks {
+    margin: 0.5rem;
+    text-align: center;
+    font-size: 19px;
+    font-weight: bold;
+}
 
 
 
@@ -260,17 +319,41 @@ i {
 
 .next-page {
     display: flex;
-    padding: 0 2rem 2rem 2rem;
+    padding: 0 2rem 1rem 2rem;
     justify-content: flex-end;
 }
 .next-page a {
     text-decoration: none;
+    padding: 0 0.5rem;
     color: black;
     font-weight: bold;
+    transition: all 0.3s ease;
 }
 
 
 
+
+@media (max-width: 400px) {    
+    .other-grid {
+        display: grid;
+        grid-template-columns: none;
+    }
+}
+
+
+@media (max-width: 744px) {
+    .question-form .text-form-top {
+        display: block;
+        text-align: center;
+    }
+    .question-form .text-form-right {
+        display: none;
+    }
+    .question-form {
+        display: grid;
+        grid-template-columns: none;
+    }
+}
 
 
 @media (max-width: 768px) {
@@ -288,11 +371,6 @@ i {
     }
 
     .projects-grid {
-        display: grid;
-        grid-template-columns: none;
-    }
-    
-    .other-grid {
         display: grid;
         grid-template-columns: none;
     }
@@ -370,6 +448,15 @@ i {
     .troll:hover {
         color: black;
     }
+
+    button:hover {
+      background: #2b36ab;
+    }
+
+    .next-page a:hover {
+        color: #00a8ff;
+        background-color: #f0f4ff;
+    }
 }
 
 
@@ -394,4 +481,12 @@ i {
         color: black;
     }
 
+    button:active {
+      background: #2b36ab;
+    }
+
+    .next-page a:active {
+        color: #00a8ff;
+        background-color: #f0f4ff;
+    }
 }
