@@ -267,6 +267,10 @@ h2 {
 .question-form .text-form-right {
     margin-top: auto;
     margin-bottom: auto;
+    line-height: 2;
+}
+.question-form p {
+    margin-top: 0.5rem;
 }
 input, textarea, button {
     width: 100%;
@@ -285,7 +289,6 @@ button {
 }
 .question-form > div {
     font-size: 18px;
-    line-height: 2;
 }
 .question-form strong {
     font-style: italic;
