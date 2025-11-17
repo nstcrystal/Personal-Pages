@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSTCrystal</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/faq.css">
+    <link rel="icon" href="../icon.png">
+</head>
+<body>
+    <header>
+        <h1>FAQ Page</h1>
+    </header>
+
+    
+    <nav class="home_section">
+        <span class="nick_name"><a href="../index.html">Home</a></span>
+    </nav>
+    
+    <div class="container">
+        <div class="layout">
+            <div class="left">
+                <h2>Câu hỏi</h2>
+                <div id="questionList"></div>
+                <!-- <a href="admin.html">🔧 Trang quản trị</a> -->
+            </div>
+
+            <div class="right">
+                <div id="answerBox" class="answer-card">
+                    <p>Chọn một câu hỏi để xem nội dung.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+    async function loadData() {
+        // return JSON.parse(localStorage.getItem("qaData") || "[]");
+
+        if (location.protocol === "file:") {
+            // console.warn("Offline → luôn dùng localStorage");
+            return JSON.parse(localStorage.getItem("qaData") || "[]");
+        }
+        
+        try {
+            // const res = await fetch("/data/question.json");
+            const res = await fetch("./data/questions.json", { method: "GET" });
+            // if (!res.ok) throw new Error("Không tìm thấy JSON");
+
+            const jsonData = await res.json();
+            // console.log("Dùng JSON: ", jsonData);
+            return jsonData;
+
+        } catch (e) {
+            // console.warn("Dùng localStorage thay vì JSON");
+            return JSON.parse(localStorage.getItem("qaData") || "[]");
+        }
+    }
+
+    async function render() {
+        const list = document.getElementById("questionList");
+        const box = document.getElementById("answerBox");
+
+        // const data = loadData();
+        const data = await loadData();
+        
+        list.innerHTML = "";
+
+        data.forEach((item, index) => {
+            const div = document.createElement("div");
+            div.className = "question-item";
+            div.textContent = item.q;
+
+            div.onclick = () => {
+                box.innerHTML = `
+                    <h3>${item.q}</h3>
+                    <i><small style="color:gray;">${item.time || ""}</small></i>
+                    <p>${item.a}</p>
+                `;
+            };
+            list.appendChild(div);
+        });
+    }
+
+    render();
+</script>
+
+</body>
+</html>

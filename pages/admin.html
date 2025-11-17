@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+
+    <header>
+        <h1>Trang ADMIN</h1>
+    </header>
+
+    <nav class="home_section">
+        <span class="nick_name"><a href="../index.html">Home</a></span>
+    </nav>
+
+    <div class="card">
+        <h2>Thêm câu hỏi mới</h2>
+        <input id="newQ" placeholder="Nhập câu hỏi...">
+        <textarea id="newA" rows="3" placeholder="Nhập câu trả lời..."></textarea>
+        <button onclick="addItem()">Thêm</button>
+    </div>
+    
+    <div class="card">
+        <div class="down-load">
+            <h2>Danh sách câu hỏi</h2>
+            <button onclick="downloadJSON()">Tải file JSON</button>
+        </div>
+        <div id="list"></div>
+    </div>
+
+    <!-- <a href="./faq.html">⬅ Quay lại trang Q&A</a> -->
+    
+
+<script>
+    function loadData() {
+        return JSON.parse(localStorage.getItem("qaData") || "[]");
+    }
+
+    function saveData(data) {
+        localStorage.setItem("qaData", JSON.stringify(data));
+    }
+
+    function addItem() {
+        const q = document.getElementById("newQ").value.trim();
+        const a = document.getElementById("newA").value.trim();
+
+        if (!q || !a) return alert("Vui lòng nhập đủ câu hỏi và câu trả lời!");
+
+        const data = loadData();
+        // data.unshift({ q, a }); // thêm vào đầu danh sách
+        data.unshift({ q, a, time: new Date().toLocaleString() });
+        saveData(data);
+
+        document.getElementById("newQ").value = "";
+        document.getElementById("newA").value = "";
+
+        render();
+    }
+
+    function deleteItem(index) {
+        const data = loadData();
+        if (!confirm("Bạn chắc chắn muốn xóa?")) return;
+        data.splice(index, 1);
+        saveData(data);
+        render();
+    }
+
+    function render() {
+        const data = loadData();
+        const list = document.getElementById("list");
+        list.innerHTML = "";
+
+        data.forEach((item, index) => {
+            const div = document.createElement("div");
+            div.className = "item";
+            div.innerHTML = `
+                <b>${item.q}</b>
+                <p>${item.a}</p>
+                <button class="delete" onclick="deleteItem(${index})">Xóa</button>
+            `;
+            list.appendChild(div);
+        });
+    }
+    render();
+
+    function downloadJSON() {
+        const data = loadData(); // lấy dữ liệu hiện tại trong localStorage
+        const blob = new Blob([JSON.stringify(data, null, 4)], {
+            type: "application/json"
+        });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "question.json"; // tên file muốn tải
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+</script>
+
+
+</body>
+</html>

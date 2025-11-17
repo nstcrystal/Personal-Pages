@@ -1,0 +1,60 @@
+
+
+.card {
+    background-color: #f8f9fa; 
+    padding: 2rem; 
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin: 2rem;
+}
+input, textarea {
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #ccc; 
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+button {
+    display: block;
+    padding: 0.8rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    background: #007bff; 
+    border: 0;
+    color: white; 
+    border-radius: 8px; 
+    cursor:pointer;
+}
+button.delete { 
+    background: #ea2535c0; 
+}
+button.delete:hover { 
+    background: #ff0015; 
+}
+
+
+.item {
+    background: white; 
+    padding: 15px; 
+    border: 1px solid #ddd;
+    border-radius: 8px; 
+    margin-bottom: 10px;
+}
+.item p {
+    white-space: pre-line;
+}
+
+
+.down-load {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+.down-load h2 {
+    width: fit-content;
+}
+.down-load button {
+    margin: 0;
+    width: 10%;
+}
