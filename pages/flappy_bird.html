@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NSTCrystal</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/flappy_bird.css">
+    <link rel="icon" href="../icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Project Page</h1>
+    </header>
+
+    
+    <nav class="home_section">
+        <a href="../index.html" class="nick_name">Home</a>
+    </nav>
+
+
+    <div class="container">
+        <div class="title">
+            <h2>Code Flappy Bird bằng Python sử dụng thư viện Pygame</h2>
+            <div class="links-list">
+                <div class="link">
+                    <a href="#">File Python</a>
+                </div>
+                <div class="link">
+                    <a href="https://github.com/nstcrystal/Flappy_bird" target="_blank">Source code <i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="block">
+            <h3>1. Import thư viện</h3>
+            <pre class="code">import pygame, time, random
+import sys, os</pre>
+            <div class="explain">
+                Nhập thư viện Pygame, Random, System và OS dùng cho đóng gói
+            </div>
+        </div>
+
+        <div class="block">
+            <h3>2. Hàm resource_path</h3>
+            <pre class="code">def resource_path(path):
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, path)
+    return os.path.join(os.path.abspath("."), path)</pre>
+            <div class="explain">
+                Dùng khi build .exe với PyInstaller để tìm đúng file asset
+            </div>
+        </div>
+
+        <div class="block">
+            <h3>3. Khởi tạo game</h3>
+            <pre class="code">pygame.mixer.pre_init(...)
+pygame.init()</pre>
+            <div class="explain">
+                Chuẩn bị âm thanh và khởi tạo Pygame
+            </div>
+        </div>
+
+        <div class="block">
+            <h3>4. Hàm vẽ mặt đất</h3>
+            <pre class="code">def draw_floor():
+screen.blit(floor, (floor_x_position, 530))
+screen.blit(floor, (floor_x_position + 378, 530))</pre>
+            <div class="explain">
+                Vẽ mặt đất chạy ngang bằng 2 ảnh ghép lại
+            </div>
+        </div>
+
+        <div class="block">
+            <h3>5. Hàm tạo ống</h3>
+            <pre class="code">def create_pipe():
+    random_pipi_position = random.choice(pipe_height)
+    bottom = pipe.get_rect(midtop=(450, random_pipi_position))
+    top = pipe.get_rect(midtop=(450, random_pipi_position - 670))
+    return bottom, top</pre>
+            <div class="explain">
+                Tạo ống trên + dưới với khoảng cách 670px
+            </div>
+        </div>
+
+        <div class="block">
+            <h3>6. Hàm di chuyển ống</h3>
+            <pre class="code">def pipe_space(pipe_list):
+    for p in pipe_list:
+    p.centerx -= 5
+    return pipe_list</pre>
+            <div class="explain">
+                Cho ống trôi ngang sang trái
+            </div>
+        </div>
+
+        <div class="block">
+            <h3>7. Va chạm</h3>
+            <pre class="code">def check_collision(pipe_list):
+    for p in pipe_list:
+        if bird_rect.colliderect(p): 
+            return True
+        if bird_rect.top <= -20 or bird_rect.bottom>= 530: 
+            return True
+    return False</pre>
+            <div class="explain">
+                Kiểm tra chim va vào ống, mặt đất hoặc trần
+            </div>
+        </div>
+
+        <div class="block">
+            <h3>8. Chim rơi & xoay</h3>
+            <pre class="code">def rotate_bird(old_bird):
+    return pygame.transform.rotozoom(old_bird, -bird_movement*4, 1)</pre>
+            <div class="explain">
+                Quay chim theo vector rơi để nhìn tự nhiên
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="https://kit.fontawesome.com/fb1d4fa484.js" crossorigin="anonymous"></script>
+
+</html>

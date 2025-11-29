@@ -10,6 +10,7 @@
     <title>NSTCrystal</title>
     <link rel="stylesheet" href="./assets/css/main.css">
     <link rel="icon" href="./icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body ontouchstart = "">
     <header>
@@ -17,7 +18,7 @@
     </header>
 
     <nav class="home_section">
-        <span class="nick_name"><a href="./index.html">Home</a></span>
+        <a href="./index.html" class="nick_name">Home</a>
         <span class="menu_bar">
             <a href="#about">About</a>
             <a href="#project">Project</a>
@@ -40,7 +41,7 @@
     <div class="introduction_section">
         <h2>Introduction</h2>
         <div class="introduction-content">
-            <img src="./assets/images/avatar.jpg" alt="Profile Photo">
+            <img class="click-image" src="./assets/images/avatar.jpg" alt="Profile Photo">
             <div class="introduction-text">
                 <p class="paragraph">
                     Xin chào, tôi là một sinh viên ngành công nghệ thông tin đang thử tạo ra trang web 
@@ -66,22 +67,25 @@
                     <a href="https://github.com/nstcrystal" target="_blank"><i class="fa-brands fa-github"></i></a>
                 </li>
             </ul>
-            <img src="./assets/images/picture.jpg" alt="Profile Photo">
+            <img class="click-image" src="./assets/images/picture.jpg" alt="Profile Photo">
         </div>
     </div>
     
-    <div id="project" class="projecs_section">
+    <div id="project" class="projects_section">
         <h2>Projects</h2>
         <div class="projects-grid">
             <div class="project-card">
-                <h3>...</h3>
-                <p class="paragraph">
-                    ~Coming soon~
-                </p>
+                <a href="./pages/flappy_bird.html">
+                    <h3>Flappy Birrd</h3>
+                    <img src="./assets/images/flappy_bird.png" alt="">
+                    <p class="quote">
+                        Code bằng Python và sử dụng thư viện Pygame
+                    </p>
+                </a>
             </div>
             <div class="project-card">
                 <h3>...</h3>
-                <p class="paragraph">
+                <p class="quote">
                     ...
                 </p>
             </div>
@@ -280,6 +284,12 @@
     </footer>
 
 
+    <!-- Popup -->
+    <div id="image-popup" class="popup">
+        <span id="close-btn">&times;</span>
+        <img id="popup-img">
+    </div>
+
 
 <script>
   const webhookURL = "https://discord.com/api/webhooks/1438047383698280469/U8RB-3e9O9EaURfiQwkeiL_-IKR9Q2ggUweIl2NrSslQ0bLQxGL9GnIqDaP2QfOpDNRf";
@@ -314,4 +324,29 @@
 
 </body>
 <script src="https://kit.fontawesome.com/fb1d4fa484.js" crossorigin="anonymous"></script>
+
+<script>
+    const images = document.querySelectorAll(".click-image");
+    const popup = document.getElementById("image-popup");
+    const popupImg = document.getElementById("popup-img");
+    const closeBtn = document.getElementById("close-btn");
+
+    images.forEach(img => {
+        img.onclick = function () {
+            popup.style.display = "flex";
+            popupImg.src = this.src;
+        };
+    });
+
+    closeBtn.onclick = function () {
+        popup.style.display = "none";
+    };
+
+    popup.onclick = function(e) {
+        if (e.target === popup) {
+            popup.style.display = "none";
+        }
+    };
+</script>
+
 </html>
