@@ -292,17 +292,17 @@
 
 
 <script>
-document.getElementById("questionForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+    document.getElementById("questionForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-    const name = document.getElementById("name").value;
-    const question = document.getElementById("question").value;
+        const name = document.getElementById("name").value;
+        const question = document.getElementById("question").value;
 
-    await fetch("https://nstcrystal-github-io.vercel.app/api/send", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, question })
-    });
+        await fetch("https://nstcrystal-github-io.vercel.app/api/send", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, question, birthday: "15032006"})
+        });
 
     alert("Đã gửi thành công!");
 });
